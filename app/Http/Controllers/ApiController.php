@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
+use App\Models\Post;
+use App\Models\PostReaction;
+use App\Models\User; // Импортируем модель User
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
+class ApiController extends Controller
+{
+
+public function StoreImage(Request $request)
+{
+    if (!$request->hasFile('image')) {
+        return response()->json(['error' => 'No file uploaded'], 400);
+    }
+
+    $file = $request->file('image');
+    $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+    $extension = $file->getClientOriginalExtension();
+
+    // Нормализуем имя: убираем всё лишнее, оставляем буквы, цифры, дефисы, точки и подчёркивания
+    $safeName = Str::slug($originalName, '-', 'utf8');
+    $filename = $safeName . '.' . $extension;
+
+    $directory = 'images';
+    $fullPath = $directory . '/' . $filename;
+
+    // Генерируем уникальное имя, если файл уже существует
+    $counter = 1;
+    while (Storage::disk('public')->exists($fullPath)) {
+        $newName = $safeName . '(' . $counter . ')' . '.' . $extension;
+        $fullPath = $directory . '/' . $newName;
+        $counter++;
+    }
+
+    // Сохраняем файл
+    Storage::disk('public')->put($fullPath, file_get_contents($file->getRealPath()));
+
+    // Получаем размеры
+    $dimensions = getimagesize($file->getRealPath());
+    $width = $dimensions[0] ?? null;
+    $height = $dimensions[1] ?? null;
+
+    return response()->json([
+        'success' => 1,
+        'file' => [
+            'url' => Storage::disk('public')->url($fullPath),
+            'width' => $width,
+            'height' => $height,
+        ],
+    ]);
+}
+
+    public function deleteImages(Request $request)
+    {
+        $urls = $request->input('urls', []);
+
+        foreach ($urls as $url) {
+            // Извлекаем путь к файлу из URL
+            $path = parse_url($url, PHP_URL_PATH);
+            $relativePath = str_replace('/storage/', '', $path);
+
+            // Удаляем файл
+            if (Storage::disk('public')->exists($relativePath)) {
+                Storage::disk('public')->delete($relativePath);
+            }
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+    public function StoreFile(Request $request)
+    {
+        // Проверяем, был ли загружен файл
+        if (!$request->hasFile('file')) {
+            return response()->json(['error' => 'No file uploaded'], 400);
+        }
+
+        // Получаем загруженный файл
+        $uploadedFile = $request->file('file');
+
+        // Определяем путь для сохранения файла
+        $filePath = "files/{$uploadedFile->getClientOriginalName()}";
+
+        $file = [
+            'title' => $uploadedFile->getClientOriginalName(),
+            'url' => Storage::disk('public')->url($filePath),
+            'size' => $uploadedFile->getSize(),
+            'name' => $uploadedFile->getClientOriginalName(),
+            'extension' => $uploadedFile->getClientOriginalExtension()
+        ];
+
+
+        // Проверяем, существует ли файл с таким именем
+        if (Storage::disk('public')->exists($filePath)) {
+            // Если файл уже существует, возвращаем его URL
+            return response()->json([
+                'success' => 1,
+                'file' => $file,
+
+            ]);
+        }
+
+        // Сохраняем файл в папку `files`
+        Storage::disk('public')->put($filePath, file_get_contents($uploadedFile->getRealPath()));
+
+        // Возвращаем ответ в формате, ожидаемом Editor.js
+        return response()->json([
+            'success' => 1,
+            'file' => $file
+        ]);
+    }
+}

@@ -1,0 +1,236 @@
+// _config.scss
+
+// === ОСНОВНАЯ ПАЛИТРА ===
+
+// Градиент сайта
+$primary-from: #ff8a00; // оранжевый
+$primary-to: #da1b60; // розово-пурпурный
+
+// Primary акценты
+$primary-light: #ff6b35;
+$primary-dark: #a70e44;
+
+// Secondary (зелёный — твой color-3)
+$secondary: #8ac832; // основной secondary-цвет
+$secondary-light: #a0d655; // светлее — для ховеров
+$secondary-dark: #73b520; // темнее — для теней/акцентов
+$secondary-fade: rgba(138, 200, 50, 0.3); // полупрозрачный зелёный
+$secondary-fade-alt: rgba(95, 134, 40, 0.788); // полупрозрачный зелёный
+
+// Цвета разметки (annotations)
+$color-1: $primary-from; // оранжевый
+$color-2: #ff4d6d; // коралловый
+$color-3: $secondary; // зелёный — успех
+$color-4: $primary-to; // розово-пурпурный
+
+// Фон и текст
+$BodyBg: #14171a;
+$TextColor: #e0e0e0;
+$TextMuted: #a0a0a0;
+$PostTextColor: #d1d1d1;
+$PostCardColor: #88919d;
+
+// Выделение
+$Selection: $primary-from;
+
+// Info (синий — добавлено)
+$info: #3b82f6; // основной синий
+$info-light: #60a5fa; // светлее — для ховеров
+$info-dark: #2563eb; // темнее — для акцентов
+$info-fade: rgba(59, 130, 246, 0.3); // полупрозрачный синий
+
+// === ВСПОМОГАТЕЛЬНЫЕ UI-ЦВЕТА (нейтральные фоны, границы) ===
+
+// Фоновые тона для полей, карточек, модалок
+$ui-bg-base: rgba(28, 30, 34, 0.75);
+$ui-bg-hover: rgba(35, 38, 44, 0.85);
+$ui-bg-focus: rgba(42, 46, 52, 0.95);
+
+// Границы
+$ui-border: $secondary-fade;
+$ui-border-hover: $secondary-light; // зелёный ховер
+$ui-border-focus: $secondary-light; // яркий зелёный фокус
+
+// Текст
+$ui-text: $TextColor; // #e0e0e0
+$ui-placeholder: $TextMuted; // #a0a0a0
+
+// Тени
+$ui-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+$ui-focus-shadow: 0 0 0 2px rgba(138, 200, 50, 0.25);
+
+$GradientMainFrom: $primary-from;
+$GradientMainTo: $primary-to;
+
+// Заголовки
+$ui-heading: $TextColor; // #e0e0e0 — как основной текст
+$ui-heading-muted: $TextMuted; // #a0a0a0
+
+// Ссылки
+$ui-link: $secondary; // зелёный — акцент
+$ui-link-hover: $secondary-light;
+$ui-link-visited: $secondary-dark;
+
+// Кнопки
+$ui-btn-bg: $secondary;
+$ui-btn-text: #000;
+$ui-btn-hover-bg: $secondary-light;
+$ui-btn-active-bg: $secondary-dark;
+$ui-btn-border: transparent;
+$ui-btn-border-hover: transparent;
+
+$ui-btn-gradient-first: #8bbe00;
+$ui-btn-gradient-last: #7bae00;
+
+// === АЛЬТЕРНАТИВНЫЕ ЦВЕТА (рыжий и розовый вместо зелёного) ===
+
+// Рыжий (оранжево-красный)
+$tertiary: #ff6f3c; // основной рыжий
+$tertiary-light: #ff8a65; // светлый рыжий
+$tertiary-dark: #e05600; // тёмный рыжий
+$tertiary-fade: rgba(255, 111, 60, 0.3); // полупрозрачный рыжий
+
+// Розовый (альтернатива зелёному)
+$pink-accent: #ff69b4; // яркий розовый
+$pink-accent-light: #ff85a2; // светлый розовый
+$pink-accent-dark: #d64584; // тёмный розовый
+$pink-accent-fade: rgba(255, 105, 180, 0.3); // полупрозрачный розовый
+
+// Альтернативная кнопка (нейтральная, например, отмена)
+$ui-btn-alt-bg: $ui-placeholder;
+$ui-btn-alt-text: $tertiary;
+$ui-btn-alt-hover-bg: $tertiary-dark;
+
+// === ЭКСПОРТ В CSS-ПЕРЕМЕННЫЕ ===
+
+:root {
+    // Основные цвета
+    --color-1: #{$color-1};
+    --color-2: #{$color-2};
+    --color-3: #{$color-3};
+    --color-4: #{$color-4};
+
+    // Primary
+    --primary-from: #{$primary-from};
+    --primary-to: #{$primary-to};
+    --primary-light: #{$primary-light};
+    --primary-dark: #{$primary-dark};
+
+    // Secondary (зелёный)
+    --secondary: #{$secondary};
+    --secondary-light: #{$secondary-light};
+    --secondary-dark: #{$secondary-dark};
+    --secondary-fade: #{$secondary-fade};
+    --secondary-fade-alt: #{$secondary-fade-alt};
+
+    // Фон и текст
+    --BodyBg: #{$BodyBg};
+    --TextColor: #{$TextColor};
+    --TextMuted: #{$TextMuted};
+    --Selection: #{$Selection};
+    --PostTextColor: #{$PostTextColor};
+    --PostCardColor: #{$PostCardColor};
+
+    // UI-цвета (для форм, карточек и т.д.)
+    --ui-bg-base: #{$ui-bg-base};
+    --ui-bg-hover: #{$ui-bg-hover};
+    --ui-bg-focus: #{$ui-bg-focus};
+    --ui-border: #{$ui-border};
+    --ui-border-hover: #{$ui-border-hover};
+    --ui-border-focus: #{$ui-border-focus};
+    --ui-text: #{$ui-text};
+    --ui-placeholder: #{$ui-placeholder};
+    --ui-shadow: #{$ui-shadow};
+    --ui-focus-shadow: #{$ui-focus-shadow};
+
+    // Заголовки
+    --ui-heading: #{$ui-heading};
+    --ui-heading-muted: #{$ui-heading-muted};
+
+    // Ссылки
+    --ui-link: #{$ui-link};
+    --ui-link-hover: #{$ui-link-hover};
+    --ui-link-visited: #{$ui-link-visited};
+
+    // Кнопки (основные)
+    --ui-btn-bg: #{$ui-btn-bg};
+    --ui-btn-text: #{$ui-btn-text};
+    --ui-btn-hover-bg: #{$ui-btn-hover-bg};
+    --ui-btn-active-bg: #{$ui-btn-active-bg};
+    --ui-btn-border: #{$ui-btn-border};
+    --ui-btn-border-hover: #{$ui-btn-border-hover};
+
+    // Альтернативные кнопки
+    --ui-btn-alt-bg: #{$ui-btn-alt-bg};
+    --ui-btn-alt-text: #{$ui-btn-alt-text};
+    --ui-btn-alt-hover-bg: #{$ui-btn-alt-hover-bg};
+
+    --ui-btn-gradient-first: #{$ui-btn-gradient-first};
+    --ui-btn-gradient-last: #{$ui-btn-gradient-last};
+
+    // Альтернативные цвета
+    --tertiary: #{$tertiary};
+    --tertiary-light: #{$tertiary-light};
+    --tertiary-dark: #{$tertiary-dark};
+    --tertiary-fade: #{$tertiary-fade};
+    --pink-accent: #{$pink-accent};
+    --pink-accent-light: #{$pink-accent-light};
+    --pink-accent-dark: #{$pink-accent-dark};
+    --pink-accent-fade: #{$pink-accent-fade};
+
+    // Info (синий)
+    --info: #{$info};
+    --info-light: #{$info-light};
+    --info-dark: #{$info-dark};
+    --info-fade: #{$info-fade};
+}
+
+// ::selection и body — остаются как были
+::selection {
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+    background: $Selection !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-feature-settings: "onum" 1;
+    font-feature-settings: "onum" 1;
+    letter-spacing: -0.015625rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    font-family: "Poppins", sans-serif;
+    background-color: $BodyBg;
+    color: $TextColor;
+}
+
+pre,
+.MobileSideBar {
+    //scrollbar
+    &::-webkit-scrollbar {
+        width: 0.5rem; // 8px → 0.5rem (при базовом font-size: 16px)
+        height: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $ui-bg-base;
+        border-radius: 0.25rem; // 4px → 0.25rem
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $ui-border;
+        border-radius: 0.25rem; // 4px → 0.25rem
+        &:hover {
+            background: $ui-border-hover;
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: $ui-bg-base;
+    }
+}

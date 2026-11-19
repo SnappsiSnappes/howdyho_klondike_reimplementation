@@ -1,0 +1,43 @@
+
+.pseudo-container {
+    @apply max-w-screen-lg mx-auto;
+}
+
+.Decoration {
+    min-height: 100vh; /* или 1000px, или auto */
+    background-image: url('/storage/decoration/decor.png');
+    background-repeat: no-repeat;
+    // background-size: cover;
+    background-position: top center; /* чтобы начало было сверху */
+}
+
+.PaginationButton {
+  @apply flex items-center justify-center w-10 h-10 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer;
+  background: var(--ui-bg-base);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+  box-shadow: var(--ui-shadow);
+
+  &:hover:not(.PaginationButton--disabled):not(.PaginationButton--active) {
+    background: var(--ui-bg-hover);
+    border-color: var(--secondary-light);
+    color: var(--secondary-light);
+  }
+
+  &--active {
+    background: linear-gradient(135deg,
+      var(--ui-btn-gradient-first),
+      var(--ui-btn-gradient-last)
+    );
+    color: var(--ui-btn-text);
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 0 2px var(--secondary-fade), var(--ui-shadow);
+    transform: scale(1.05);
+  }
+
+  &--disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,19 @@
+.CategoryBlueFire {
+    @apply flex gap-1 flex-nowrap;
+    font-family: "Roboto Condensed", sans-serif;
+    transition: 0.3s color;
+    
+
+    &:hover {
+        background-image: url("/storage/decoration/text-bg-category.gif");
+        background-blend-mode: screen;
+        background-repeat: no-repeat;
+        background-position: -23% 20%;
+
+        color: #00bfff;
+        transition: 0.3s color;
+        mix-blend-mode: lighten; /* но это повлияет на весь текст + фон страницы! */
+
+    }
+}
+

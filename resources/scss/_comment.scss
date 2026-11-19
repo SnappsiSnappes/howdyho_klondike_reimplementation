@@ -1,0 +1,174 @@
+@use "config" as *;
+
+.comment-section {
+    @apply mt-7 ;
+}
+
+.comment-section-small {
+    @apply mt-7 grid grid-cols-2 gap-[3rem];
+}
+
+.username-div {
+    @apply mb-5 leading-5 m-3;
+}
+
+.comment {
+    @apply border border-[--secondary-fade] rounded-lg mt-5;
+}
+
+.username-name {
+    @apply truncate max-w-xs text-[--ui-link];
+    font-weight: 800;
+}
+
+.username-date {
+    color: var(--label-muted); // сероватый
+    font-weight: 400;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: color 0.2s ease;
+}
+
+.Comment-label {
+    @apply text-xl font-bold items-center flex gap-1;
+    color: $TextColor;
+    font-family: Roboto;
+}
+
+
+.comment-text-container {
+}
+
+.comment-expand{
+   @apply pb-5 ps-5 text-[--ui-link];
+}
+
+.comment-text {
+    @apply break-words m-5 comment-text-font;
+    max-height: 4.5em; /* ≈ 3 строки */
+    line-height: 1.5;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+.comment-text.expanded {
+    max-height: none;
+}
+
+.expand-btn {
+    @apply text-[--ui-btn-bg] m-5 hover:underline text-sm transition-colors duration-200 mt-1 cursor-pointer;
+}
+
+
+
+
+/* === КНОПКА "Загрузить еще комментарии" === */
+.Comment-load-more-btn {
+  @apply mt-4 w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-200 ease-in-out
+  bg-transparent
+  text-[--primary-light]
+  border-2 border-[--secondary-fade]
+  hover:border-[--secondary-light] hover:text-white
+  active:scale-[0.99]
+  cursor-pointer
+  relative
+  shadow-sm hover:shadow-md
+  disabled:opacity-40 disabled:cursor-not-allowed
+  ;
+
+  &::after {
+    content: "⬇";
+    @apply ml-2 inline-block transition-transform duration-150;
+  }
+
+  &:hover::after {
+    transform: translateY(1px);
+  }
+  
+  // Градиентная обводка через background-clip
+  background-image: linear-gradient(var(--BodyBg), var(--BodyBg)),
+                    linear-gradient(to right, var(--primary-from), var(--primary-to));
+  border: none;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  
+  // Сброс предыдущего border
+  border: 2px solid transparent;
+  
+  // Ховер с градиентом
+  &:hover {
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--BodyBg), var(--BodyBg)),
+                      linear-gradient(to right, var(--primary-light), var(--primary-to));
+  }
+  
+  // Фокус с градиентом
+  &:focus {
+    background-image: linear-gradient(var(--BodyBg), var(--BodyBg)),
+                      linear-gradient(to right, var(--primary-from), var(--primary-to));
+    outline: none;
+  }
+}
+
+
+
+/* === КНОПКА "Отправить комментарий" === */
+.Comment-Submit {
+  @apply mt-4 w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-200 ease-in-out
+  bg-transparent
+  text-[--secondary-light]
+  border-2 border-[--secondary-fade]
+  hover:border-[--secondary-light] hover:text-white
+  active:scale-[0.99]
+  focus:outline-none focus:ring-2 focus:ring-[--secondary-light] focus:ring-opacity-50 focus:ring-offset-2 focus:ring-offset-[--BodyBg]
+  cursor-pointer
+  relative
+  shadow-sm hover:shadow-md
+  disabled:opacity-40 disabled:cursor-not-allowed
+  ;
+
+  &::after {
+    content: "→";
+    @apply ml-2 inline-block transition-transform duration-150;
+  }
+
+  &:hover:not(:disabled)::after {
+    transform: translateX(2px);
+  }
+}
+
+
+.comment-form {
+    @apply mt-6 ;
+}
+
+.CommentInput {
+  font-family: "Jura", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+    @apply w-full;
+}
+
+
+
+.error {
+    @apply text-red-500 text-sm mt-1;
+}
+
+.char-count {
+    @apply text-xs text-gray-500 mt-1;
+}
+
+
+
+.comment-text-font {
+  font-family: "Jura", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+}
+

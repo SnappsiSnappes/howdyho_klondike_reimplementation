@@ -1,0 +1,140 @@
+// _btns.scss
+@use "config" as *;
+
+.preview-tabs {
+    display: flex;
+    flex-direction: row;
+    background-color: #0d0f10;
+    
+    .preview-tab {
+    @apply text-[0.84rem] sm:text-[0.92rem];
+
+        display: flex;
+        gap: 0.47rem;
+        align-items: center;
+        line-height: 1;
+        padding: 0.4rem 0.8rem;
+        font-family: "Roboto Condensed", sans-serif;
+        border: none;
+        cursor: pointer;
+        position: relative; // важно для псевдоэлемента
+        color: inherit; // или задайте базовый цвет
+
+        svg {
+            display: block;
+            flex-shrink: 0;
+        }
+
+        &:hover {
+            color: var(--color-1);
+        }
+
+        &.tab-reactions {
+
+            color: rgb(0, 0, 0);
+            background: transparent; // фон теперь у псевдоэлемента
+            z-index: 1;
+
+            // Базовый градиент
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(
+                    to right,
+                    $ui-btn-gradient-first 0%,
+                    $ui-btn-gradient-last 100%
+                );
+                z-index: -1;
+                transition: opacity 0.5s ease-in;
+                opacity: 1;
+            }
+
+            // При наведении — второй градиент поверх
+            &:hover {
+                color: rgb(0, 0, 0); // остаётся чёрным
+
+                &::before {
+                    opacity: 0; // скрываем базовый
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(
+                        to right,
+                        $primary-light 0%,
+                        $primary-dark 100%
+                    );
+                    z-index: -1;
+                    opacity: 1;
+                }
+            }
+
+            // Важно: ::after тоже должен быть с transition
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(
+                    to right,
+                    $primary-light 0%,
+                    $primary-dark 100%
+                );
+                z-index: -1;
+                opacity: 0;
+                transition: opacity 0.5s ease-in;
+            }
+
+            
+        }
+
+        &.preview-tab-similar {
+            @apply hidden sm:flex;
+        }
+        &.preview-tab-comments{
+            @apply hidden sm:flex;
+        }
+    }
+}
+
+.round-btn {
+    @apply w-8 h-8 overflow-hidden rounded-full bg-slate-800 text-slate-300 
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900;
+    // Используем тёмно-серый с акцентным кольцом при фокусе (опционально)
+    &:focus {
+        box-shadow: 0 0 0 2px var(--color-1);
+    }
+}
+
+.primary-btn {
+    @apply flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold 
+           leading-6 shadow-sm text-white disabled:cursor-wait transition-all;
+    background: linear-gradient(135deg, $primary-from, $primary-to);
+    border: none;
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, $primary-light, $primary-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(218, 27, 96, 0.4);
+    }
+    &:focus-visible {
+        outline: 2px solid $primary-from;
+        outline-offset: 2px;
+    }
+    &:disabled {
+        opacity: 0.6;
+        background: rgba(100, 100, 100, 0.3);
+        transform: none;
+        box-shadow: none;
+    }
+}

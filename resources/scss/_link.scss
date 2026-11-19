@@ -1,0 +1,62 @@
+/* подчеркивание со смещением */
+.custom-link {
+    @apply relative font-semibold;
+    color: var(--color-4); // розово-пурпурный
+}
+
+.custom-link::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ff8a00] to-[#da1b60] transition-all duration-300;
+}
+
+.custom-link:hover::after {
+    @apply w-full;
+}
+
+/* класс для ссылок */
+.paragraph > a,
+.content > a {
+    @apply custom-link;
+}
+
+.text-link {
+    @apply font-semibold text-blue-500 hover:text-blue-600;
+}
+
+// Стили для ссылок внутри EditorJS-рендера
+.paragraph-default > a, span > a {
+  @apply text-[var(--ui-link)] relative;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none; // убираем стандартное подчёркивание, если хочешь чистый лук
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  // Добавляем стрелку ↗ после ссылки
+  &::after {
+    content: "↗";
+    @apply ml-1 text-[0.95em] opacity-70;
+    color: var(--ui-link);
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+
+  &:hover {
+    @apply text-[var(--ui-link-hover)];
+
+    &::after {
+      @apply opacity-100;
+      color: var(--ui-link-hover);
+    }
+  }
+
+  &:visited {
+    @apply text-[var(--ui-link-visited)];
+
+    &::after {
+      color: var(--ui-link-visited);
+      opacity: 0.8;
+    }
+  }
+
+  // Опционально: убрать стрелку для внутренних ссылок (если они есть)
+  // Например, если href начинается с / или # — но это сложно в CSS.
+  // Лучше добавлять класс вручную, если нужно.
+}

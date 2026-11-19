@@ -1,0 +1,251 @@
+@use "config" as *;
+
+.cdx-marker {
+    font-family: "Roboto", sans-serif;
+    color: black;
+    font-weight: 700; // делаем жирнее
+
+    font-stretch: expanded;
+
+    background-color: $GradientMainFrom !important;
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from($GradientMainFrom),
+        to($GradientMainTo)
+    ) !important;
+    background: -o-linear-gradient(
+        left,
+        $GradientMainFrom,
+        $GradientMainTo
+    ) !important;
+    background: linear-gradient(
+        to right,
+        $GradientMainFrom,
+        $GradientMainTo
+    ) !important;
+}
+
+/* Стиль для заголовка */
+.gradient-header {
+    @apply text-[1.5rem] sm:text-[2rem];
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: -.95px;
+
+    line-height: 2.78rem;
+    /* Увеличенный размер */
+    font-weight: 650;
+    margin: 0;
+    padding: 0;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, #ff8a00, #da1b60);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: none;
+    display: inline-block;
+}
+
+.cool-text {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgb(136, 145, 157);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin: 12px 0 0;
+    padding: 0;
+}
+
+/* Стили текста — без изменений */
+.cool-header {
+    padding: 1rem 0rem 0.31rem 0rem;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Градиент для базового состояния */
+    background: linear-gradient(90deg, #ff7f50, #ff6347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* ← ОБЯЗАТЕЛЬНО в базовом состоянии! */
+    color: transparent; /* fallback для не-WebKit */
+}
+
+.cool-header:hover {
+    background: linear-gradient(to right, #ff8a00, #da1b60);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none; /* как у тебя */
+}
+
+.TextMarker {
+    // Применяем градиентный фон
+    @apply cool-header;
+}
+
+.PostIndexP{
+    font-family: "Roboto Condensed", sans-serif;
+    margin-left: 10px;
+    color: silver;
+    background: #000;
+    padding: 3px 7px;
+    border-radius: 3px;
+    opacity: .5;
+    top: 0;
+    -webkit-transition: .3s opacity;
+    -o-transition: .3s opacity;
+    transition: .3s opacity;
+    &:hover{
+    opacity: 1;
+
+    }
+}
+
+.PostIndexCategoryUnderlineDecoration{
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 3rem;
+        width: 100%;
+        height: 0.2075rem; /* 3px */
+        background-color: $GradientMainFrom;
+        background: -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            from($GradientMainFrom),
+            to($GradientMainTo)
+        );
+        background: -o-linear-gradient(
+            left,
+            $GradientMainFrom,
+            $GradientMainTo
+        );
+        background: linear-gradient(
+            to right,
+            $GradientMainFrom,
+            $GradientMainTo
+        );
+    }
+}
+
+.UnderlineDecoration {
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0.1125rem; /* 5px / 16 = 0.3125rem */
+        width: 100%;
+        height: 0.1875rem; /* 3px */
+        background-color: $GradientMainFrom;
+        background: -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            from($GradientMainFrom),
+            to($GradientMainTo)
+        );
+        background: -o-linear-gradient(
+            left,
+            $GradientMainFrom,
+            $GradientMainTo
+        );
+        background: linear-gradient(
+            to right,
+            $GradientMainFrom,
+            $GradientMainTo
+        );
+    }
+}
+
+
+
+.cdx-underline {
+    @apply underline !decoration-[--secondary] !decoration-4;
+}
+
+.title {
+    @apply my-6 text-center text-3xl font-bold leading-9;
+    color: $TextColor;
+}
+.paragraph {
+    @apply py-[0.5rem];
+    font-size: 1rem;
+    line-height: 1.6rem;
+}
+
+.paragraph-card{
+    @apply py-[0.5rem] text-ellipsis;
+    font-size: 1rem;
+    line-height: 1.36rem;
+}
+
+.paragraph-default{
+    @apply py-[0.5rem];
+    font-size: 1rem;
+    line-height: 1.6rem;
+}
+
+.paragraph-inside-post{
+    @apply py-[0.5rem];
+    font-size: 1rem;
+    line-height: 1.6rem;
+}
+
+.blockquote {
+    @apply border-l-4 border-slate-300 pl-4 italic;
+    color: $TextColor;
+}
+
+.header-1,
+h1 {
+    @apply text-4xl font-bold text-center  py-[3rem];
+    color: $TextColor;
+}
+
+.header-2,
+h2 {
+    @apply text-3xl font-bold text-center py-[3rem];
+    color: $TextColor;
+}
+
+.header-3,
+h3 {
+    @apply text-2xl font-bold text-center py-[3rem];
+    color: $TextColor;
+}
+
+.header-4,
+h4 {
+    @apply text-xl font-bold text-center py-[3rem];
+    color: $TextColor;
+}
+
+.header-5,
+h5 {
+    @apply text-lg font-bold text-center py-[3rem];
+    color: $TextColor;
+}
+
+.header-6,
+h6 {
+    @apply text-base font-bold text-center  py-[3rem];
+    color: $TextColor;
+}
+
+.warning-div {
+    border-left-color: var(--tertiary);
+}

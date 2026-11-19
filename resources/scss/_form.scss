@@ -1,0 +1,246 @@
+// _form.scss
+@use "config" as *;
+
+
+
+
+:root {
+    --form-bg: var(--ui-bg-base);
+    --form-bg-hover: var(--ui-bg-hover);
+    --form-bg-focus: var(--ui-bg-focus);
+    --form-border: var(--ui-border);
+    --form-border-hover: var(--ui-border-hover);
+    --form-border-focus: var(--ui-border-focus);
+    --form-text: var(--ui-text);
+    --form-placeholder: var(--ui-placeholder);
+    --form-shadow: var(--form-shadow);
+    --form-focus-shadow: var(--ui-focus-shadow);
+
+        // Цвета для label
+    --label-text: var(--ui-text);
+    --label-accent: #8ac832; // зелёный акцент
+    --label-muted: var(--ui-placeholder);
+
+}
+
+// Миксин для тёмных полей с зелёным акцентом
+@mixin dark-input-style {
+    background: var(--form-bg);
+    border: 1px solid var(--form-border);
+    color: var(--form-text);
+    border-radius: 10px;
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    transition: all 0.25s cubic-bezier(0.34, 0.8, 0.4, 1);
+    box-shadow: var(--form-shadow);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    // Автозаполнение
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 1000px var(--form-bg) inset !important;
+        -webkit-text-fill-color: var(--form-text) !important;
+        box-shadow: 0 0 0 1000px var(--form-bg) inset !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    // Placeholder
+    &::placeholder {
+        color: var(--form-placeholder);
+        opacity: 1;
+    }
+
+    // Hover — лёгкое зелёное подсвечивание
+    &:hover {
+        background: var(--form-bg-hover);
+        border-color: var(--form-border-hover);
+    }
+
+    // Focus — яркий зелёный акцент
+    &:focus {
+        outline: none;
+        background: var(--form-bg-focus);
+        border-color: var(--form-border-focus);
+        box-shadow: var(--form-shadow), var(--form-focus-shadow);
+    }
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+// Стилизация файловых инпутов
+@mixin file-input-style {
+    background: var(--form-bg);
+    border: 1px dashed var(--form-border);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 0.8, 0.4, 1);
+    color: var(--form-placeholder);
+    font-size: 0.9375rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+
+    // Hover — лёгкое зелёное подсвечивание
+    &:hover {
+        background: var(--form-bg-hover);
+        border-color: var(--form-border-hover);
+        color: var(--form-text);
+    }
+
+    // Focus — яркий зелёный акцент
+    &:focus {
+        outline: none;
+        border-color: var(--form-border-focus);
+        box-shadow: var(--form-shadow), var(--form-focus-shadow);
+    }
+
+    // При наличии файла — стиль изменяется
+    &[data-has-file="true"] {
+        border-style: solid;
+        background: var(--form-bg-focus);
+        color: var(--form-text);
+    }
+
+    // Скрытие настоящего input[type="file"]
+    input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+    }
+
+    // Стиль для области с информацией о файле
+    .file-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        .file-icon {
+            width: 2rem;
+            height: 2rem;
+            color: var(--form-border-hover);
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: var(--form-text);
+            word-break: break-all;
+            max-width: 100%;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: var(--form-placeholder);
+        }
+    }
+
+    // Стиль для области "перетаскивания"
+    &.drag-over {
+        background: var(--form-bg-hover);
+        border-color: var(--form-border-focus);
+        border-style: solid;
+        box-shadow: var(--form-shadow), var(--form-focus-shadow);
+    }
+}
+
+// Основной класс
+.MainThemeInput {
+    @include dark-input-style;
+
+    textarea {
+        padding: 0.75rem 1rem;
+        resize: vertical;
+        min-height: 5rem;
+        line-height: 1.5;
+    }
+
+    select {
+        // Стрелка — серая
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238a8a8a' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 1rem center;
+        background-repeat: no-repeat;
+        background-size: 1.25rem 1.25rem;
+        padding-right: 2.5rem;
+        cursor: pointer;
+
+        // При фокусе — стрелка становится зелёной!
+        &:focus {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238ac832' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+        }
+    }
+
+    // Стили для файловых инпутов
+    &.file-input {
+        @include file-input-style;
+    }
+}
+
+// Альтернативный класс для файловых инпутов
+.FileThemeInput {
+    @include file-input-style;
+}
+
+
+// === Новые классы для label ===
+
+// 1. Яркий label с акцентным цветом
+.LabelBright {
+    color: var(--label-accent); // зелёный
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #a5d95a; // чуть светлее
+    }
+}
+
+// 2. Средний label — обычный текст, но чуть ярче
+.LabelMedium {
+    color: var(--label-text); // обычный текст
+    font-weight: 500;
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #bfbfbf; // чуть светлее
+    }
+}
+
+// 3. Приглушённый label с акцентом при фокусе (для input)
+.LabelMuted {
+    color: var(--label-muted); // сероватый
+    font-weight: 400;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: var(--label-text); // становится как основной текст
+    }
+    // Когда input в фокусе, label подсвечивается
+    .MainThemeInput:focus + &,
+    .MainThemeInput:focus-within + & {
+        color: var(--label-accent); // зелёный
+        font-weight: 500;
+    }
+}

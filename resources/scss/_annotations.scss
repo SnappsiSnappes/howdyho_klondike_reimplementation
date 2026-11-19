@@ -1,0 +1,6 @@
+@use 'config' as *;
+
+span[data-color="color-1"] { color: $color-1; }
+span[data-color="color-2"] { color: $color-2; }
+span[data-color="color-3"] { color: $color-3; }
+span[data-color="color-4"] { color: $color-4; }
