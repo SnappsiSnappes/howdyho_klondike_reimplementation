@@ -33,11 +33,6 @@ Redis нужен для того чтобы показывать статист�
 - NPM последней версии
 - REDIS
 
-### Команда для установки PHP-зависимостей для Laravel на Ubuntu 24.04
-```bash
-sudo apt-get install -y php8.3-cli php8.3-sqlite3 php8.3-common php8.3-fpm php8.3-zip php8.3-gd php8.3-mbstring php8.3-curl php8.3-xml php8.3-bcmath
-```
-
 
 ## Linux (Ubuntu/Debian)
 
