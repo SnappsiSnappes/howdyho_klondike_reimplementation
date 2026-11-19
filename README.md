@@ -12,6 +12,8 @@
 
 Redis нужен для того чтобы показывать статистику в реальном времени, сколько человек зашло на сайт.
 
+В качестве реакций можно добавлять Lottie(телеграм стикеры), gid, png, jpg, jpeg, webp, mp4
+
 # Сделать себя админом
 1) открыть файл howdyho_klondike_reimplementation\app\Http\Middleware\RestrictAuthRoutes.php
 2) указать свой ip адрес
